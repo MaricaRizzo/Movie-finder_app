@@ -1,14 +1,26 @@
 import { useState } from "react";
+import { fetchMovieData } from "../utils/omdb";
 
 export default function SearchBar(props) {
   const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSearch = async () => {
+    if (!query) return;
+    setLoading(true);
+    setError("");
     try {
-      const movies = await searchRecipes(query);
-      props.setMovies(movies);
-    } catch (error) {
-      console.log(error);
+      const data = await fetchMovieData(query);
+      if (data.Response === "True") {
+        props.setMovies(data.Search);
+      } else {
+        setError(data.Error);
+      }
+    } catch (err) {
+      setError("An error occurred while fetching data");
+    } finally {
+      setLoading(false);
     }
   };
 
