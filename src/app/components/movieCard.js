@@ -1,5 +1,6 @@
 import { useContext, useCallback } from "react";
 import { FavoritesContext } from "../context/FavoritesContext";
+import Link from "next/link";
 
 export default function MovieCard(props) {
   const { setFavorites } = useContext(FavoritesContext);
@@ -31,16 +32,24 @@ export default function MovieCard(props) {
         <div className="p-4">
           <h3 className="text-lg font-semibold">{props.movie.Title}</h3>
           <p className="text-sm">{props.movie.Year}</p>
-          <span
-            onClick={toggleFavorite}
-            className="cursor-pointer text-red-500 flex items-center mt-2"
-          >
-            {props.isFavorite ? (
-              <i className="fa-solid fa-heart"></i>
-            ) : (
-              <i className="fa-regular fa-heart"></i>
-            )}
-          </span>
+          <div className="flex justify-between">
+            <span
+              onClick={toggleFavorite}
+              className="cursor-pointer text-red-500 flex items-center mt-2"
+            >
+              {props.isFavorite ? (
+                <i className="fa-solid fa-heart"></i>
+              ) : (
+                <i className="fa-regular fa-heart"></i>
+              )}
+            </span>
+            <Link
+              href={`/movie/${props.movie.imdbID}`}
+              className="text-blue-400 hover:text-blue-300 flex items-center mt-2"
+            >
+              Read more <i className="fa-solid fa-arrow-right ml-1"></i>
+            </Link>
+          </div>
         </div>
       </li>
     </div>
