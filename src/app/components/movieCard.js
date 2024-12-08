@@ -4,7 +4,6 @@ import Link from "next/link";
 
 export default function MovieCard(props) {
   const { setFavorites } = useContext(FavoritesContext);
-  console.log(props.movie);
 
   const toggleFavorite = useCallback(
     (event) => {

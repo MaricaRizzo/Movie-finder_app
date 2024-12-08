@@ -3,6 +3,7 @@ import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { fetchMovieDetails } from "../../utils/omdb";
 import Header from "../../components/header";
+import Footer from "@/app/components/footer";
 
 export default function MoviePage() {
   const { id } = useParams();
@@ -48,9 +49,9 @@ export default function MoviePage() {
     );
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="p-6 flex flex-col items-center">
+      <main className="p-6 flex flex-1 flex-col items-center">
         <div className="bg-gray-800 text-white shadow-md rounded-lg overflow-hidden p-6 max-w-3xl w-full">
           <h1 className="text-2xl font-bold mb-4">
             {movie.Title} ({movie.Year})
@@ -81,6 +82,7 @@ export default function MoviePage() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
